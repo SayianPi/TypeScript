@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const dog_1 = require("./dog");
+const duck_1 = require("./duck");
+const monitor_1 = require("./monitor");
 const dog = new dog_1.Dog();
 dog.bark();
 /* 1) TS Simple Types(primitive)
@@ -214,6 +216,7 @@ console.log(negativeNumber(10));
 /* casting with 'as' */
 let xy = "howdy";
 console.log(xy.length);
+console.log(xy.length); /* error: 'xy' is of type 'unknown'.*/
 let yz = 5;
 console.log(yz.length); /* prints 'undefined' since the variable still hold the number */
 /* casting with '<>' */
@@ -222,4 +225,39 @@ console.log(xy.length);
     - To override type errors that TypeScript may throw when casting, first cast to unknown, then to the target type. */
 let za = "howdy";
 console.log(za.length);
+/* 11) TS Classes */
+class Cat {
+    constructor() {
+        this.name = "";
+    }
+}
+const cat = new Cat();
+cat.name = "sneaky";
+console.log(cat.name);
+const duck = new duck_1.Duck(); /* imported from duck.ts */
+duck.name = "coco";
+duck.sound();
+console.log(duck.name);
+const monitor = new monitor_1.Monitor("samsung");
+console.log(monitor.getName()); /* monitor.name isn't accessible from outside the class since it is private. see monitor.ts */
+class Mpad {
+    constructor(name) {
+        this.name = name;
+    }
+    getPadName() {
+        return this.name;
+    }
+}
+const mousepad = new Mpad("fantech");
+console.log(mousepad.getPadName());
+class Mic {
+    constructor() {
+        this.name = "";
+    }
+    getMicName(naam) {
+        return this.name = naam;
+    }
+}
+const mic = new Mic();
+console.log(mic.getMicName("sus"));
 //# sourceMappingURL=index.js.map

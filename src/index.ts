@@ -1,6 +1,6 @@
 import { Dog } from "./dog";
-
-
+import { Duck } from "./duck";
+import { Monitor } from "./monitor";
 
 
 const dog = new Dog();
@@ -280,6 +280,7 @@ console.log(pow(2));
 /* casting with 'as' */
 let xy: unknown = "howdy";
 console.log((xy as string).length);
+console.log(xy.length); /* error: 'xy' is of type 'unknown'.*/
 
 let yz: unknown = 5;
 console.log((yz as string).length);  /* prints 'undefined' since the variable still hold the number */
@@ -291,3 +292,42 @@ console.log((<string>xy).length);
     - To override type errors that TypeScript may throw when casting, first cast to unknown, then to the target type. */
 let za = "howdy";
 console.log(((za as unknown) as string).length);
+
+
+
+/* 11) TS Classes */
+class Cat {
+    name: string = "";
+}
+const cat = new Cat();
+cat.name = "sneaky";
+console.log(cat.name); 
+
+const duck = new Duck(); /* imported from duck.ts */
+duck.name = "coco";
+duck.sound();
+console.log(duck.name);
+
+const monitor = new Monitor("samsung");
+console.log(monitor.getName()); /* monitor.name isn't accessible from outside the class since it is private. see monitor.ts */
+
+class Mpad {
+    public constructor(private name: string){  /* TypeScript provides a convenient way to define class members in the constructor, 
+                                                    by adding a visibility modifiers to the parameter. */
+
+    }
+    public getPadName(){
+        return this.name;
+    }
+}
+const mousepad = new Mpad("fantech");
+console.log(mousepad.getPadName());
+
+class Mic {
+    name: string = "";
+    getMicName( naam: string){
+        return this.name = naam;
+    }
+}
+const mic = new Mic();
+console.log(mic.getMicName("sus"));
